@@ -6,14 +6,19 @@ export interface BodyScroll {
   noRelative?: boolean;
   noImportant?: boolean;
   gapMode?: GapMode;
+  dynamic?: boolean;
 }
+
+export interface BodyState {
+  gap: number
+};
 
 const Style = styleSinglentone();
 
 // important tip - once we measure scrollBar width and remove them
 // we could not repeat this operation
 // thus we are using style-singleton - only the first "yet correct" style will be applied.
-const getStyles = (gap: number, allowRelative: boolean, gapMode: GapMode, important: string) => `
+const getStyles = (gap: number, allowRelative: boolean, gapMode: GapMode = 'margin', important: string) => `
   body {
     overflow: hidden ${important};
     ${
@@ -45,9 +50,58 @@ const getStyles = (gap: number, allowRelative: boolean, gapMode: GapMode, import
 export const zeroRightClassName = 'right-scroll-bar-position';
 export const fullWidthClassName = 'width-before-scroll-bar';
 
-export const RemoveScrollBar: React.SFC<BodyScroll> = ({noRelative, noImportant, gapMode = 'margin'}) => {
-  const gap = getGapWidth(gapMode);
-  return gap
-    ? <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>
-    : null;
-};
+export class RemoveScrollBar extends React.Component<BodyScroll, BodyState> {
+  state = {
+    gap: getGapWidth(this.props.gapMode)
+  };
+
+  componentDidMount() {
+    const gap = getGapWidth(this.props.gapMode);
+    if (gap !== this.state.gap) {
+      this.setState({
+        gap
+      })
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.onResize);
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.onResize);
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.state.gap) {
+      const gap = getGapWidth(this.props.gapMode);
+      if (gap !== this.state.gap) {
+        this.setState({
+          gap
+        })
+      }
+    }
+  }
+
+  onResize = () => {
+    this.forceUpdate();
+    if (this.state.gap && this.props.dynamic) {
+      if (window.innerHeight > document.body.offsetHeight) {
+        // reset state to reevaluate
+        this.setState({
+          gap: 0
+        })
+      }
+    }
+  };
+
+  render() {
+    const {noRelative, noImportant, gapMode} = this.props;
+    const {gap} = this.state;
+
+    return gap
+      ? <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>
+      : null;
+  }
+}

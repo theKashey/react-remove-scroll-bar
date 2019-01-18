@@ -6,7 +6,7 @@ const getOffset = (gapMode: GapMode) => {
   return parseInt(value || '', 10) || 0;
 };
 
-export const getGapWidth = (gapMode: GapMode) => {
+export const getGapWidth = (gapMode: GapMode = 'margin') => {
   if (typeof window === 'undefined') {
     return 0;
   }

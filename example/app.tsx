@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {AppWrapper} from './styled';
-import {RemoveScrollBar, fullWidthClassName, zeroRightClassName} from "../src";
+import {RemoveScrollBar, fullWidthClassName} from "../src";
 
 export interface AppState {
   counter: number;
@@ -17,12 +17,12 @@ const fill = (x: number, y: number) => {
 
 export default class App extends Component <{}, AppState> {
   state: AppState = {
-    counter: 0
+    counter: 1
   };
 
   componentDidMount() {
     setInterval(() => {
-      this.setState({counter: this.state.counter ? 0 : 1})
+      //this.setState({counter: this.state.counter ? 0 : 1})
     }, 1000);
 
     setTimeout(() => {
