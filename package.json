@@ -1,6 +1,6 @@
 {
   "name": "react-remove-scroll-bar",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Removes body scroll without content _shake_",
   "main": "dist/es5/index.js",
   "scripts": {
@@ -16,7 +16,9 @@
     "format": "ts-react-toolbox format",
     "analyze": "ts-react-toolbox analyze"
   },
-  "keywords": ["scroll"],
+  "keywords": [
+    "scroll"
+  ],
   "author": "Anton Korzunov <thekashey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
