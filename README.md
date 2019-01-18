@@ -37,8 +37,10 @@ import {zeroRightClassName,fullWidthClassName} from 'react-remove-scroll-bar';
 500b after compression (excluding tslib).
 
 # Scroll-Locky
+All code is a result of a [react-scroll-locky](https://github.com/theKashey/react-scroll-locky) refactoring.
 
-Extracted [react-scroll-locky](https://github.com/theKashey/react-scroll-locky)
+# Article
+There is a medium article about preventing the body scroll - [How to fight the <body> scroll](https://medium.com/@antonkorzunov/how-to-fight-the-body-scroll-2b00267b37ac)
 
 # License
 MIT
