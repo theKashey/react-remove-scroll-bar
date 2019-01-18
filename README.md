@@ -1,0 +1,39 @@
+react-remove-scroll-bar
+====
+
+Removes scroll bar (by setting `overflow: hidden` on body), and preserves the scroll bar "gap".
+
+Read - it just makes scroll bar invisible.
+
+Does nothing if scroll bar does not consume any space.
+
+# Usage
+
+```js
+import {RemoveScrollBar} from 'react-remove-scroll-bar';
+
+<RemoveScrollBar /> -> no scroll bar
+```
+
+### The Right Border
+To prevent content jumps __position:fixed__ elements with `right:0`  should have additional classname applied.
+It will just provide a _non-zero_ right, when it needed, to maintain the right "gap".
+```js
+import {zeroRightClassName,fullWidthClassName} from 'react-remove-scroll-bar';
+
+// to set `right:0` on an element
+<div className={zeroRightClassName} />
+
+// to set `width:100%` on an element
+<div className={fullWidthClassName} />
+```
+
+# Size
+500b after compression (excluding tslib).
+
+# Scroll-Locky
+
+Extracted [react-scroll-locky](https://github.com/theKashey/react-scroll-locky)
+
+# License
+MIT
