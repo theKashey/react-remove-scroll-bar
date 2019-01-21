@@ -1,17 +1,42 @@
 export type GapMode = 'padding' | 'margin';
 
-const getOffset = (gapMode: GapMode) => {
-  const cs = window.getComputedStyle(document.body);
-  const value = cs[gapMode === 'padding' ? 'paddingRight' : 'marginRight'];
-  return parseInt(value || '', 10) || 0;
+export interface GapOffset {
+  left: number;
+  top: number;
+  right: number;
+  gap: number;
+}
+
+export const zeroGap = {
+  left: 0,
+  top: 0,
+  right: 0,
+  gap: 0,
 };
 
-export const getGapWidth = (gapMode: GapMode = 'margin') => {
+const getOffset = (gapMode: GapMode): number[] => {
+  const cs = window.getComputedStyle(document.body);
+  const left = cs[gapMode === 'padding' ? 'paddingLeft' : 'marginLeft'];
+  const top = cs[gapMode === 'padding' ? 'paddingTop' : 'marginTop'];
+  const right = cs[gapMode === 'padding' ? 'paddingRight' : 'marginRight'];
+  return [
+    parseInt(left || '', 10) || 0,
+    parseInt(top || '', 10) || 0,
+    parseInt(right || '', 10) || 0
+  ];
+};
+
+export const getGapWidth = (gapMode: GapMode = 'margin'): GapOffset => {
   if (typeof window === 'undefined') {
-    return 0;
+    return zeroGap;
   }
-  const currentOffset = getOffset(gapMode);
+  const offsets = getOffset(gapMode);
   const documentWidth = document.documentElement.clientWidth;
   const windowWidth = window.innerWidth;
-  return Math.max(0, windowWidth - documentWidth + currentOffset);
+  return {
+    left: offsets[0],
+    top: offsets[1],
+    right: offsets[2],
+    gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0]),
+  }
 };

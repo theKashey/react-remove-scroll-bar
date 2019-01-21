@@ -34,16 +34,16 @@ export default class App extends Component <{}, AppState> {
     const gapMode = 'margin';
     return (
       <AppWrapper>
-        {this.state.counter && <RemoveScrollBar gapMode={gapMode}/>}
-        <div style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          height: '50px',
-          backgroundColor: '#F00'
-        }}>floating
-        </div>
+        {this.state.counter ? <RemoveScrollBar/> : undefined}
+        {/*<div style={{*/}
+          {/*position: 'absolute',*/}
+          {/*left: 0,*/}
+          {/*right: 0,*/}
+          {/*top: 0,*/}
+          {/*height: '50px',*/}
+          {/*backgroundColor: '#F00'*/}
+        {/*}}>floating*/}
+        {/*</div>*/}
 
         <div
           style={{
