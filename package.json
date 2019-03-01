@@ -39,6 +39,7 @@
   ],
   "repository": "https://github.com/theKashey/react-remove-scroll-bar",
   "dependencies": {
-    "react-style-singleton": "^1.1.0"
+    "react-style-singleton": "^1.1.0",
+    "tslib": "^1.0.0"
   }
 }
