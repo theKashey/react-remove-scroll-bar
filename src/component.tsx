@@ -103,8 +103,6 @@ export class RemoveScrollBar extends React.Component<BodyScroll, BodyState> {
     const {noRelative, noImportant, gapMode = 'margin'} = this.props;
     const {gap} = this.state;
 
-    return gap.gap
-      ? <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>
-      : null;
+    return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>;
   }
 }
