@@ -24,13 +24,17 @@ You dont need this option in normal cases.
 To prevent content jumps __position:fixed__ elements with `right:0`  should have additional classname applied.
 It will just provide a _non-zero_ right, when it needed, to maintain the right "gap".
 ```js
-import {zeroRightClassName,fullWidthClassName} from 'react-remove-scroll-bar';
+import {zeroRightClassName,fullWidthClassName, noScrollbarsClassName} from 'react-remove-scroll-bar';
 
 // to set `right:0` on an element
 <div className={zeroRightClassName} />
 
 // to set `width:100%` on an element
 <div className={fullWidthClassName} />
+
+// to remove scrollbar from an element
+<div className={fullWidthClassName} />
+
 ```
 
 # Size

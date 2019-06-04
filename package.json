@@ -22,7 +22,6 @@
   "author": "Anton Korzunov <thekashey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "size-limit": "^0.21.1",
     "ts-react-toolbox": "^0.2.2"
   },
   "engines": {
@@ -35,7 +34,8 @@
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "constants"
   ],
   "repository": "https://github.com/theKashey/react-remove-scroll-bar",
   "dependencies": {

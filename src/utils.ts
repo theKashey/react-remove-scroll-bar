@@ -14,15 +14,17 @@ export const zeroGap = {
   gap: 0,
 };
 
+const parse = (x: string | null) => parseInt(x || '', 10) || 0;
+
 const getOffset = (gapMode: GapMode): number[] => {
   const cs = window.getComputedStyle(document.body);
   const left = cs[gapMode === 'padding' ? 'paddingLeft' : 'marginLeft'];
   const top = cs[gapMode === 'padding' ? 'paddingTop' : 'marginTop'];
   const right = cs[gapMode === 'padding' ? 'paddingRight' : 'marginRight'];
   return [
-    parseInt(left || '', 10) || 0,
-    parseInt(top || '', 10) || 0,
-    parseInt(right || '', 10) || 0
+    parse(left),
+    parse(top),
+    parse(right),
   ];
 };
 
