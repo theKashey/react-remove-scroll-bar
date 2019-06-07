@@ -1,6 +1,8 @@
 react-remove-scroll-bar
 ====
 
+> v1+ for React 15, v2+ requires React 16.8+
+
 Removes scroll bar (by setting `overflow: hidden` on body), and preserves the scroll bar "gap".
 
 Read - it just makes scroll bar invisible.

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styleSinglentone} from 'react-style-singleton';
+import {styleSingleton} from 'react-style-singleton';
 import {GapMode, GapOffset, getGapWidth, zeroGap} from './utils';
 import {fullWidthClassName, zeroRightClassName, noScrollbarsClassName} from "./constants";
 
@@ -10,11 +10,7 @@ export interface BodyScroll {
   dynamic?: boolean;
 }
 
-export interface BodyState {
-  gap: GapOffset;
-};
-
-const Style = styleSinglentone();
+const Style = styleSingleton();
 
 // important tip - once we measure scrollBar width and remove them
 // we could not repeat this operation
@@ -59,54 +55,40 @@ const getStyles = ({left, top, right, gap}: GapOffset, allowRelative: boolean, g
   }
 `;
 
-export class RemoveScrollBar extends React.Component<BodyScroll, BodyState> {
-  state = {
-    gap: getGapWidth(this.props.gapMode)
-  };
+export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
+  const [gap, setGap] = React.useState(getGapWidth(props.gapMode))
 
-  componentDidMount() {
-    const gap = getGapWidth(this.props.gapMode);
-    if (gap !== this.state.gap) {
-      this.setGap(gap);
-    }
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.onResize);
-    }
-  }
-
-  componentWillUnmount() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize);
-    }
-  }
-
-  componentDidUpdate() {
-    if (!this.state.gap) {
-      const gap = getGapWidth(this.props.gapMode);
-      if (gap !== this.state.gap) {
-        this.setGap(gap);
-      }
-    }
-  }
-
-  setGap(gap: GapOffset) {
-    this.setState({gap});
-  }
-
-  onResize = () => {
-    this.forceUpdate();
-    if (this.state.gap && this.props.dynamic) {
+  const onResize = React.useCallback(() => {
+    if (gap && props.dynamic) {
       if (window.innerHeight > document.body.offsetHeight) {
         // reset state to re-evaluate
-        this.setGap(zeroGap);
+        setGap(zeroGap);
       }
     }
-  };
+  }, []);
 
-  render() {
-    const {noRelative, noImportant, gapMode = 'margin'} = this.props;
-    const {gap} = this.state;
+  React.useEffect(() => {
+    const gap = getGapWidth(props.gapMode);
+    if (gap !== gap) {
+      setGap(gap); // how it could be?
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', onResize);
+      return () => window.removeEventListener('resize', onResize);
+    }
+    return;
+  }, []);
 
-    return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>;
-  }
-}
+  React.useEffect(() => {
+    if (!gap) {
+      const gap = getGapWidth(props.gapMode);
+      if (gap !== gap) {
+        setGap(gap);
+      }
+    }
+  }, [!gap]);
+
+  const {noRelative, noImportant, gapMode = 'margin'} = props;
+
+  return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : '')}/>;
+};

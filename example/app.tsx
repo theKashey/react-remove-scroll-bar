@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {AppWrapper} from './styled';
 import {RemoveScrollBar, fullWidthClassName} from "../src";
 
 export interface AppState {
@@ -33,7 +32,7 @@ export default class App extends Component <{}, AppState> {
   render() {
     const gapMode = 'margin';
     return (
-      <AppWrapper>
+      <div>
         {this.state.counter ? <RemoveScrollBar/> : undefined}
         {/*<div style={{*/}
           {/*position: 'absolute',*/}
@@ -133,7 +132,7 @@ export default class App extends Component <{}, AppState> {
         </div>
 
         {fill(1000, 1).map((x, index) => <span>{index}**** </span>)}
-      </AppWrapper>
+      </div>
     )
   }
 }
