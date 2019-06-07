@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {styleSingleton} from 'react-style-singleton';
-import {GapMode, GapOffset, getGapWidth, zeroGap} from './utils';
+import {GapMode, GapOffset, getGapWidth} from './utils';
 import {fullWidthClassName, zeroRightClassName, noScrollbarsClassName} from "./constants";
 
 export interface BodyScroll {
   noRelative?: boolean;
   noImportant?: boolean;
   gapMode?: GapMode;
-  dynamic?: boolean;
 }
 
 const Style = styleSingleton();
@@ -58,35 +57,9 @@ const getStyles = ({left, top, right, gap}: GapOffset, allowRelative: boolean, g
 export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
   const [gap, setGap] = React.useState(getGapWidth(props.gapMode))
 
-  const onResize = React.useCallback(() => {
-    if (gap && props.dynamic) {
-      if (window.innerHeight > document.body.offsetHeight) {
-        // reset state to re-evaluate
-        setGap(zeroGap);
-      }
-    }
-  }, []);
-
   React.useEffect(() => {
-    const gap = getGapWidth(props.gapMode);
-    if (gap !== gap) {
-      setGap(gap); // how it could be?
-    }
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', onResize);
-      return () => window.removeEventListener('resize', onResize);
-    }
-    return;
-  }, []);
-
-  React.useEffect(() => {
-    if (!gap) {
-      const gap = getGapWidth(props.gapMode);
-      if (gap !== gap) {
-        setGap(gap);
-      }
-    }
-  }, [!gap]);
+    setGap(getGapWidth(props.gapMode));
+  }, [props.gapMode]);
 
   const {noRelative, noImportant, gapMode = 'margin'} = props;
 

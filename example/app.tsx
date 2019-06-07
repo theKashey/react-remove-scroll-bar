@@ -16,16 +16,16 @@ const fill = (x: number, y: number) => {
 
 export default class App extends Component <{}, AppState> {
   state: AppState = {
-    counter: 1
+    counter: 0
   };
 
   componentDidMount() {
     setInterval(() => {
-      //this.setState({counter: this.state.counter ? 0 : 1})
+     // this.setState({counter: this.state.counter ? 0 : 1})
     }, 1000);
 
     setTimeout(() => {
-      //this.setState({counter: this.state.counter ? 0 : 1})
+      this.setState({counter: this.state.counter ? 0 : 1})
     }, 1000);
   }
 
