@@ -33,7 +33,7 @@ import {zeroRightClassName,fullWidthClassName, noScrollbarsClassName} from 'reac
 <div className={fullWidthClassName} />
 
 // to remove scrollbar from an element
-<div className={fullWidthClassName} />
+<div className={noScrollbarsClassName} />
 
 ```
 
