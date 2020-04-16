@@ -30,7 +30,13 @@
     "node": ">=8.5.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0",
+    "@types/react": "^16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "jsnext:main": "dist/es2015/index.js",
   "module": "dist/es2015/index.js",
@@ -41,7 +47,7 @@
   ],
   "repository": "https://github.com/theKashey/react-remove-scroll-bar",
   "dependencies": {
-    "react-style-singleton": "^2.0.0",
+    "react-style-singleton": "^2.1.0",
     "tslib": "^1.0.0"
   }
 }
