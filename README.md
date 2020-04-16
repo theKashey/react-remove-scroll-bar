@@ -1,5 +1,10 @@
-react-remove-scroll-bar
-====
+<h1>react-remove-scroll-bar</h1>
+
+[![npm](https://img.shields.io/npm/v/react-remove-scroll-bar.svg)](https://www.npmjs.com/package/react-remove-scroll-bar)
+[![bundle size](https://badgen.net/bundlephobia/minzip/react-remove-scroll-bar)](https://bundlephobia.com/result?p=react-remove-scroll-bar)
+[![downloads](https://badgen.net/npm/dm/react-remove-scroll-bar)](https://www.npmtrends.com/react-remove-scroll-bar)
+
+<hr />
 
 > v1+ for React 15, v2+ requires React 16.8+
 
@@ -30,7 +35,7 @@ import {zeroRightClassName,fullWidthClassName, noScrollbarsClassName} from 'reac
 <div className={fullWidthClassName} />
 
 // to remove scrollbar from an element
-<div className={fullWidthClassName} />
+<div className={noScrollbarsClassName} />
 
 ```
 
