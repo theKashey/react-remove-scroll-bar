@@ -1,6 +1,6 @@
 {
   "name": "react-remove-scroll-bar",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Removes body scroll without content _shake_",
   "main": "dist/es5/index.js",
   "scripts": {
