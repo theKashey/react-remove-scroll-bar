@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styleSingleton} from 'react-style-singleton';
 import {GapMode, GapOffset, getGapWidth} from './utils';
-import {fullWidthClassName, zeroRightClassName, noScrollbarsClassName} from "./constants";
+import {fullWidthClassName, zeroRightClassName, noScrollbarsClassName, removedBarSizeVariable} from "./constants";
 
 export interface BodyScroll {
   noRelative?: boolean;
@@ -51,6 +51,10 @@ const getStyles = ({left, top, right, gap}: GapOffset, allowRelative: boolean, g
   
   .${fullWidthClassName} .${fullWidthClassName} {
     margin-right: 0 ${important};
+  }
+  
+  body {
+    ${removedBarSizeVariable}: ${gap}px;
   }
 `;
 
