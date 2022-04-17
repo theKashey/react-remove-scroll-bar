@@ -1,7 +1,7 @@
 [
   {
-    path: "dist/es2015/index.js",
+    path: "dist/es2019/index.js",
     ignore: ["react-dom", "tslib"],
-    limit: "700 B"
+    limit: "1000 B"
   }
 ]
