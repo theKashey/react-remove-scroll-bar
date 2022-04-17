@@ -1,7 +1,7 @@
 [
   {
     "name": "dist/es2019/index.js",
-    "passed": false,
+    "passed": true,
     "size": 980
   }
 ]
