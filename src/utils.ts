@@ -21,24 +21,23 @@ const getOffset = (gapMode: GapMode): number[] => {
   const left = cs[gapMode === 'padding' ? 'paddingLeft' : 'marginLeft'];
   const top = cs[gapMode === 'padding' ? 'paddingTop' : 'marginTop'];
   const right = cs[gapMode === 'padding' ? 'paddingRight' : 'marginRight'];
-  return [
-    parse(left),
-    parse(top),
-    parse(right),
-  ];
+
+  return [parse(left), parse(top), parse(right)];
 };
 
 export const getGapWidth = (gapMode: GapMode = 'margin'): GapOffset => {
   if (typeof window === 'undefined') {
     return zeroGap;
   }
+
   const offsets = getOffset(gapMode);
   const documentWidth = document.documentElement.clientWidth;
   const windowWidth = window.innerWidth;
+
   return {
     left: offsets[0],
     top: offsets[1],
     right: offsets[2],
     gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0]),
-  }
+  };
 };
