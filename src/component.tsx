@@ -27,6 +27,7 @@ const getStyles = (
   }
   body {
     overflow: hidden ${important};
+    overscroll-behavior: contain;
     ${[
       allowRelative && `position: relative ${important};`,
       gapMode === 'margin' &&
