@@ -70,13 +70,8 @@ const getStyles = (
  * Removes page scrollbar and blocks page scroll when mounted
  */
 export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
-  const [gap, setGap] = React.useState(getGapWidth(props.gapMode));
-
-  React.useEffect(() => {
-    setGap(getGapWidth(props.gapMode));
-  }, [props.gapMode]);
-
   const { noRelative, noImportant, gapMode = 'margin' } = props;
+  const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
 
   return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
 };
