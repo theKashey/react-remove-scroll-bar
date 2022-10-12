@@ -1,6 +1,6 @@
 {
   "name": "react-remove-scroll-bar",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Removes body scroll without content _shake_",
   "main": "dist/es5/index.js",
   "jsnext:main": "dist/es2015/index.js",
@@ -19,7 +19,8 @@
     "update": "lib-builder update",
     "prepublish": "yarn build && yarn changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "changelog:rewrite": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog:rewrite": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "storybook": "start-storybook -p 6006"
   },
   "keywords": [
     "scroll"
@@ -27,8 +28,9 @@
   "author": "Anton Korzunov <thekashey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@theuiteam/lib-builder": "^0.1.4",
     "@size-limit/preset-small-lib": "^2.1.6",
+    "@storybook/react": "^6.4.22",
+    "@theuiteam/lib-builder": "^0.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -36,8 +38,8 @@
     "node": ">=10"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
@@ -50,8 +52,8 @@
   ],
   "repository": "https://github.com/theKashey/react-remove-scroll-bar",
   "dependencies": {
-    "tslib": "^2.0.0",
-    "react-style-singleton": "^2.2.1"
+    "react-style-singleton": "^2.2.1",
+    "tslib": "^2.0.0"
   },
   "module:es2019": "dist/es2019/index.js",
   "husky": {
