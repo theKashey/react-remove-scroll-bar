@@ -1,3 +1,9 @@
+## [2.3.4](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.3...v2.3.4) (2022-10-12)
+
+### Bug Fixes
+
+- remove measure time error reporting, fixes [#35](https://github.com/theKashey/react-remove-scroll-bar/issues/35) ([3f4bf5d](https://github.com/theKashey/react-remove-scroll-bar/commit/3f4bf5d26713b18e3161dce34b7a07265d763864))
+
 ## [2.3.3](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.2...v2.3.3) (2022-06-06)
 
 ## [2.3.2](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.1...v2.3.2) (2022-06-06)
