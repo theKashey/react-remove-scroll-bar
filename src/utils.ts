@@ -19,14 +19,6 @@ const parse = (x: string | null) => parseInt(x || '', 10) || 0;
 const getOffset = (gapMode: GapMode): number[] => {
   const cs = window.getComputedStyle(document.body);
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (cs.overflowY === 'hidden') {
-      console.error(
-        'react-remove-scroll-bar: cannot calculate scrollbar size because it is removed (overflow:hidden on body'
-      );
-    }
-  }
-
   const left = cs[gapMode === 'padding' ? 'paddingLeft' : 'marginLeft'];
   const top = cs[gapMode === 'padding' ? 'paddingTop' : 'marginTop'];
   const right = cs[gapMode === 'padding' ? 'paddingRight' : 'marginRight'];

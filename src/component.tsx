@@ -71,6 +71,11 @@ const getStyles = (
  */
 export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
   const { noRelative, noImportant, gapMode = 'margin' } = props;
+  /*
+   gap will be measured on every component mount
+   however it will be used only by the "first" invocation
+   due to singleton nature of <Style
+   */
   const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
 
   return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
