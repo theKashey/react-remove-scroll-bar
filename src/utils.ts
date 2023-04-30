@@ -5,6 +5,7 @@ export interface GapOffset {
   top: number;
   right: number;
   gap: number;
+  gutterCanBeRemoved: boolean;
 }
 
 export const zeroGap = {
@@ -12,6 +13,7 @@ export const zeroGap = {
   top: 0,
   right: 0,
   gap: 0,
+  gutterCanBeRemoved: true,
 };
 
 const parse = (x: string | null) => parseInt(x || '', 10) || 0;
@@ -35,10 +37,13 @@ export const getGapWidth = (gapMode: GapMode = 'margin'): GapOffset => {
   const documentWidth = document.documentElement.clientWidth;
   const windowWidth = window.innerWidth;
 
+  const gutterCanBeRemoved = window.getComputedStyle(document.documentElement).scrollbarGutter !== 'stable';
+
   return {
     left: offsets[0],
     top: offsets[1],
     right: offsets[2],
     gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0]),
+    gutterCanBeRemoved,
   };
 };

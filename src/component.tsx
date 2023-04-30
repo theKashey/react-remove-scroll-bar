@@ -16,7 +16,7 @@ const Style = styleSingleton();
 // we could not repeat this operation
 // thus we are using style-singleton - only the first "yet correct" style will be applied.
 const getStyles = (
-  { left, top, right, gap }: GapOffset,
+  { right, gap, gutterCanBeRemoved }: GapOffset,
   allowRelative: boolean,
   gapMode: GapMode = 'margin',
   important: string
@@ -25,24 +25,23 @@ const getStyles = (
    overflow: hidden ${important};
    padding-right: ${gap}px ${important};
   }
+  html {
+    scrollbar-gutter: auto !important;
+  }
   body {
     overflow: hidden ${important};
     overscroll-behavior: contain;
-    ${[
-      allowRelative && `position: relative ${important};`,
-      gapMode === 'margin' &&
-        `
-    padding-left: ${left}px;
-    padding-top: ${top}px;
-    padding-right: ${right}px;
-    margin-left:0;
-    margin-top:0;
-    margin-right: ${gap}px ${important};
-    `,
-      gapMode === 'padding' && `padding-right: ${gap}px ${important};`,
-    ]
-      .filter(Boolean)
-      .join('')}
+    ${
+      gutterCanBeRemoved
+        ? [
+            allowRelative && `position: relative ${important};`,
+            gapMode === 'margin' && `margin-right: ${gap + right}px ${important};`,
+            gapMode === 'padding' && `padding-right: ${gap + right}px ${important};`,
+          ]
+            .filter(Boolean)
+            .join('')
+        : ''
+    }
   }
   
   .${zeroRightClassName} {
