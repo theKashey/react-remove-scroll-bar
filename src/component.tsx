@@ -8,6 +8,7 @@ export interface BodyScroll {
   noRelative?: boolean;
   noImportant?: boolean;
   gapMode?: GapMode;
+  bodyClassName?: string;
 }
 
 const Style = styleSingleton();
@@ -19,13 +20,14 @@ const getStyles = (
   { left, top, right, gap }: GapOffset,
   allowRelative: boolean,
   gapMode: GapMode = 'margin',
-  important: string
+  important: string,
+  bodyClassName: string
 ) => `
   .${noScrollbarsClassName} {
    overflow: hidden ${important};
    padding-right: ${gap}px ${important};
   }
-  body {
+  body.${bodyClassName} {
     overflow: hidden ${important};
     overscroll-behavior: contain;
     ${[
@@ -61,7 +63,7 @@ const getStyles = (
     margin-right: 0 ${important};
   }
   
-  body {
+  body.${bodyClassName} {
     ${removedBarSizeVariable}: ${gap}px;
   }
 `;
@@ -70,7 +72,7 @@ const getStyles = (
  * Removes page scrollbar and blocks page scroll when mounted
  */
 export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
-  const { noRelative, noImportant, gapMode = 'margin' } = props;
+  const { noRelative, noImportant, gapMode = 'margin', bodyClassName } = props;
   /*
    gap will be measured on every component mount
    however it will be used only by the "first" invocation
@@ -78,5 +80,17 @@ export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
    */
   const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
 
-  return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
+  React.useEffect(() => {
+    if (bodyClassName) {
+      document.body.classList.add(bodyClassName);
+
+      return () => {
+        document.body.classList.remove(bodyClassName);
+      };
+    }
+
+    return;
+  }, [bodyClassName]);
+
+  return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '', bodyClassName || '')} />;
 };

@@ -2,6 +2,6 @@
   {
     path: "dist/es2019/index.js",
     ignore: ["react-dom", "tslib"],
-    limit: "1000 B"
+    limit: "1040 B"
   }
 ]
