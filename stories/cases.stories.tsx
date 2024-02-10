@@ -1,13 +1,13 @@
-import React, { ComponentProps, useState } from 'react';
+import React, { useState } from 'react';
 
 import { getGapWidth, RemoveScrollBar, zeroRightClassName } from '../src';
 
-const Locker = ({ bodyClassName }: ComponentProps<typeof RemoveScrollBar>) => {
+const Locker = () => {
   const [lock, setLock] = useState(false);
 
   return (
     <div>
-      {lock && <RemoveScrollBar bodyClassName={bodyClassName} />}
+      {lock && <RemoveScrollBar />}
       <button onClick={() => setLock(!lock)}>{lock ? 'Restore' : 'Remove'}</button>
       gap: {JSON.stringify(getGapWidth('margin'))} / {getGapWidth('padding').gap}
     </div>
@@ -71,8 +71,6 @@ export const WithScrollBarGutter = () => (
     <Default />
   </>
 );
-
-export const WithScopedBodyClass = () => <Locker bodyClassName="scoped" />;
 
 export default {
   component: RemoveScrollBar,

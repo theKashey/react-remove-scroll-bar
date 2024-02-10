@@ -1,19 +1,3 @@
-## 2.3.4 (2024-02-09)
-
-### Bug Fixes
-
-- always add overflow hidden, even for scroll-bar-free systems ([9540463](https://github.com/theKashey/react-remove-scroll-bar/commit/95404631661026008772f2c43c298ff05971dd21))
-- configure overscroll-behavior to contain scroll within body ([a29ad5d](https://github.com/theKashey/react-remove-scroll-bar/commit/a29ad5d237f9c696f430f18dbd4cc0ae0a37b617))
-- remove measure time error reporting, fixes [#35](https://github.com/theKashey/react-remove-scroll-bar/issues/35) ([3f4bf5d](https://github.com/theKashey/react-remove-scroll-bar/commit/3f4bf5d26713b18e3161dce34b7a07265d763864))
-- update style-singlenton. fixes [#32](https://github.com/theKashey/react-remove-scroll-bar/issues/32) ([f8b9a22](https://github.com/theKashey/react-remove-scroll-bar/commit/f8b9a22ae5ba8a0868caa15faf1a83ee06534f17))
-
-### Features
-
-- expose removed scroll bar size via css variable ([e357989](https://github.com/theKashey/react-remove-scroll-bar/commit/e357989a92fb8acc83466f8371d0fa558f1a5492))
-- extract constants as a separate entrypoint ([2a569b5](https://github.com/theKashey/react-remove-scroll-bar/commit/2a569b50643c251604e360a1cb366aa5a68aedda))
-- support CSP ([d805e33](https://github.com/theKashey/react-remove-scroll-bar/commit/d805e332d8525a7b39bc19765f52ca89fb415dff))
-- support non-zero body margins ([0828cf6](https://github.com/theKashey/react-remove-scroll-bar/commit/0828cf6d4fcbe142c7b487b941768db64f7b4508))
-
 ## [2.3.4](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.3...v2.3.4) (2022-10-12)
 
 ### Bug Fixes

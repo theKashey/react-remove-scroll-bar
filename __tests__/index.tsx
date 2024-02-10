@@ -1,41 +1,36 @@
 import { render } from '@testing-library/react';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { RemoveScrollBar } from '../src';
+import { lockAttribute } from '../src/component';
+
+const renderTest = () => {
+  const Test = () => {
+    const [lock, setLock] = useState(false);
+
+    return (
+      <>
+        <button onClick={() => setLock(!lock)}>Toggle</button>
+        {lock ? <RemoveScrollBar /> : null}
+      </>
+    );
+  };
+
+  return render(<Test />);
+};
 
 describe('RemoveScrollBar', () => {
-  describe('bodyClassName', () => {
-    it('should not add a className to the body by default', () => {
-      render(<RemoveScrollBar />);
+  it('should toggle the lock attribute on mount/unmount', () => {
+    const { getByRole } = renderTest();
+    const button = getByRole('button');
 
-      // no classes applied
-      expect(document.body.classList).toHaveLength(0);
+    expect(document.body.getAttribute(lockAttribute)).toBeNull();
 
-      // but styles should still be applied to the body via global tag selector
-      const bodyStyles = global.getComputedStyle(document.body);
-      expect(bodyStyles.getPropertyValue('overflow')).toBe('hidden');
-    });
+    button.click();
+    expect(document.body.getAttribute(lockAttribute)).toBeDefined();
 
-    it('should add supplied className to the body when supplied', () => {
-      const scopedClassName = 'scoped';
-      render(<RemoveScrollBar bodyClassName={scopedClassName} />);
-
-      // custom scope class applied
-      expect(document.body.classList).toContain(scopedClassName);
-
-      // styles should be applied to the body via scoped class
-      const bodyStyles = global.getComputedStyle(document.body);
-      expect(bodyStyles.getPropertyValue('overflow')).toBe('hidden');
-
-      const scopedBody = document.querySelector(`.${scopedClassName}`);
-
-      if (!scopedBody) {
-        throw new Error('The `body` element was not correctly scoped');
-      }
-
-      const scopedBodyStyles = global.getComputedStyle(scopedBody);
-      expect(scopedBodyStyles.getPropertyValue('overflow')).toBe('hidden');
-    });
+    button.click();
+    expect(document.body.getAttribute(lockAttribute)).toBeNull();
   });
 });

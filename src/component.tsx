@@ -8,10 +8,11 @@ export interface BodyScroll {
   noRelative?: boolean;
   noImportant?: boolean;
   gapMode?: GapMode;
-  bodyClassName?: string;
 }
 
 const Style = styleSingleton();
+
+export const lockAttribute = 'data-scroll-locked';
 
 // important tip - once we measure scrollBar width and remove them
 // we could not repeat this operation
@@ -20,14 +21,13 @@ const getStyles = (
   { left, top, right, gap }: GapOffset,
   allowRelative: boolean,
   gapMode: GapMode = 'margin',
-  important: string,
-  bodyClassName: string
+  important: string
 ) => `
   .${noScrollbarsClassName} {
    overflow: hidden ${important};
    padding-right: ${gap}px ${important};
   }
-  body.${bodyClassName} {
+  body[${lockAttribute}] {
     overflow: hidden ${important};
     overscroll-behavior: contain;
     ${[
@@ -63,7 +63,7 @@ const getStyles = (
     margin-right: 0 ${important};
   }
   
-  body.${bodyClassName} {
+  body[${lockAttribute}] {
     ${removedBarSizeVariable}: ${gap}px;
   }
 `;
@@ -72,7 +72,7 @@ const getStyles = (
  * Removes page scrollbar and blocks page scroll when mounted
  */
 export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
-  const { noRelative, noImportant, gapMode = 'margin', bodyClassName } = props;
+  const { noRelative, noImportant, gapMode = 'margin' } = props;
   /*
    gap will be measured on every component mount
    however it will be used only by the "first" invocation
@@ -81,16 +81,12 @@ export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
   const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
 
   React.useEffect(() => {
-    if (bodyClassName) {
-      document.body.classList.add(bodyClassName);
+    document.body.setAttribute(lockAttribute, '');
 
-      return () => {
-        document.body.classList.remove(bodyClassName);
-      };
-    }
+    return () => {
+      document.body.removeAttribute(lockAttribute);
+    };
+  }, []);
 
-    return;
-  }, [bodyClassName]);
-
-  return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '', bodyClassName || '')} />;
+  return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
 };
