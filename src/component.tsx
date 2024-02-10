@@ -12,6 +12,8 @@ export interface BodyScroll {
 
 const Style = styleSingleton();
 
+export const lockAttribute = 'data-scroll-locked';
+
 // important tip - once we measure scrollBar width and remove them
 // we could not repeat this operation
 // thus we are using style-singleton - only the first "yet correct" style will be applied.
@@ -25,7 +27,7 @@ const getStyles = (
    overflow: hidden ${important};
    padding-right: ${gap}px ${important};
   }
-  body {
+  body[${lockAttribute}] {
     overflow: hidden ${important};
     overscroll-behavior: contain;
     ${[
@@ -61,7 +63,7 @@ const getStyles = (
     margin-right: 0 ${important};
   }
   
-  body {
+  body[${lockAttribute}] {
     ${removedBarSizeVariable}: ${gap}px;
   }
 `;
@@ -77,6 +79,14 @@ export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
    due to singleton nature of <Style
    */
   const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
+
+  React.useEffect(() => {
+    document.body.setAttribute(lockAttribute, '');
+
+    return () => {
+      document.body.removeAttribute(lockAttribute);
+    };
+  }, []);
 
   return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
 };
