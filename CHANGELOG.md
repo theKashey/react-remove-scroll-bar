@@ -1,3 +1,5 @@
+## [2.3.5](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.4...v2.3.5) (2024-02-19)
+
 ## [2.3.4](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.3...v2.3.4) (2022-10-12)
 
 ### Bug Fixes
