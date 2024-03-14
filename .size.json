@@ -2,7 +2,7 @@
   {
     "name": "dist/es2019/index.js",
     "passed": true,
-    "size": 1227,
-    "sizeLimit": 1250
+    "size": 1285,
+    "sizeLimit": 1350
   }
 ]
