@@ -1,3 +1,9 @@
+## [2.3.6](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.5...v2.3.6) (2024-03-14)
+
+### Bug Fixes
+
+- correct lock behavior for nested invocations, fixes [#57](https://github.com/theKashey/react-remove-scroll-bar/issues/57) ([bd44ebe](https://github.com/theKashey/react-remove-scroll-bar/commit/bd44ebeea9af047816dbb66c42eab57cbd937fcb))
+
 ## [2.3.5](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.4...v2.3.5) (2024-02-19)
 
 ## [2.3.4](https://github.com/theKashey/react-remove-scroll-bar/compare/v2.3.3...v2.3.4) (2022-10-12)
