@@ -68,25 +68,40 @@ const getStyles = (
   }
 `;
 
+const getCurrentUseCounter = () => {
+  const counter = parseInt(document.body.getAttribute(lockAttribute) || '0', 10);
+
+  return isFinite(counter) ? counter : 0;
+};
+
+export const useLockAttribute = () => {
+  React.useEffect(() => {
+    document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString());
+
+    return () => {
+      const newCounter = getCurrentUseCounter() - 1;
+
+      if (newCounter <= 0) {
+        document.body.removeAttribute(lockAttribute);
+      } else {
+        document.body.setAttribute(lockAttribute, newCounter.toString());
+      }
+    };
+  }, []);
+};
+
 /**
  * Removes page scrollbar and blocks page scroll when mounted
  */
-export const RemoveScrollBar: React.FC<BodyScroll> = (props) => {
-  const { noRelative, noImportant, gapMode = 'margin' } = props;
+export const RemoveScrollBar: React.FC<BodyScroll> = ({ noRelative, noImportant, gapMode = 'margin' }) => {
+  useLockAttribute();
+
   /*
    gap will be measured on every component mount
    however it will be used only by the "first" invocation
    due to singleton nature of <Style
    */
   const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
-
-  React.useEffect(() => {
-    document.body.setAttribute(lockAttribute, '');
-
-    return () => {
-      document.body.removeAttribute(lockAttribute);
-    };
-  }, []);
 
   return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
 };
