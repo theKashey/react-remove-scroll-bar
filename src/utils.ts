@@ -14,7 +14,7 @@ export const zeroGap = {
   gap: 0,
 };
 
-const parse = (x: string | null) => parseInt(x || '', 10) || 0;
+const parse = (x: string | null): number => parseInt(x || '', 10) || 0;
 
 const getOffset = (gapMode: GapMode): number[] => {
   const cs = window.getComputedStyle(document.body);

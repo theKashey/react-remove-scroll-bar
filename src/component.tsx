@@ -1,8 +1,9 @@
+// @deno-types="npm:@types/react@^18.2"
 import * as React from 'react';
 import { styleSingleton } from 'react-style-singleton';
 
-import { fullWidthClassName, zeroRightClassName, noScrollbarsClassName, removedBarSizeVariable } from './constants';
-import { GapMode, GapOffset, getGapWidth } from './utils';
+import { fullWidthClassName, zeroRightClassName, noScrollbarsClassName, removedBarSizeVariable } from './constants.ts';
+import { GapMode, GapOffset, getGapWidth } from './utils.ts';
 
 export interface BodyScroll {
   noRelative?: boolean;

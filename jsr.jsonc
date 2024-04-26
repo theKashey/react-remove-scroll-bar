@@ -1,0 +1,22 @@
+{
+    "name": "@bureaudouble-forks/react-remove-scroll-bar",
+    "version": "0.0.1",
+    "nodeModulesDir": false,
+    "compilerOptions": {
+      "noErrorTruncation": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "dom.asynciterable",
+        "deno.ns"
+      ]
+    },
+    "imports": {
+      "react": "npm:react@^18.2",
+      "react-style-singleton": "jsr:@bureaudouble-forks/react-style-singleton@0.0.1"
+    },
+    "exports": {
+      ".": "./src/index.ts"
+    }
+  }
+  

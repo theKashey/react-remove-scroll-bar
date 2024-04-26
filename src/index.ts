@@ -1,6 +1,6 @@
-import { RemoveScrollBar } from './component';
-import { zeroRightClassName, fullWidthClassName, noScrollbarsClassName, removedBarSizeVariable } from './constants';
-import { getGapWidth } from './utils';
+import { RemoveScrollBar } from './component.tsx';
+import { zeroRightClassName, fullWidthClassName, noScrollbarsClassName, removedBarSizeVariable } from './constants.ts';
+import { getGapWidth } from './utils.ts';
 
 export {
   RemoveScrollBar,
