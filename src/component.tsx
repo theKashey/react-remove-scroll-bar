@@ -90,18 +90,29 @@ export const useLockAttribute = () => {
   }, []);
 };
 
+// Cache the last clean gap measurement to avoid reading contaminated styles
+// when transitioning between scroll-locked components in the same React batch.
+let lastMeasuredGap: GapOffset | undefined;
+
 /**
  * Removes page scrollbar and blocks page scroll when mounted
  */
 export const RemoveScrollBar: React.FC<BodyScroll> = ({ noRelative, noImportant, gapMode = 'margin' }) => {
   useLockAttribute();
 
-  /*
-   gap will be measured on every component mount
-   however it will be used only by the "first" invocation
-   due to singleton nature of <Style
-   */
-  const gap = React.useMemo(() => getGapWidth(gapMode), [gapMode]);
+  const gap = React.useMemo(() => {
+    // When body is already scroll-locked, computed styles are contaminated
+    // by the previous lock (e.g. margin-right includes scrollbar compensation).
+    // Reuse the last clean measurement to avoid double compensation.
+    if (document.body.hasAttribute(lockAttribute) && lastMeasuredGap) {
+      return lastMeasuredGap;
+    }
+
+    const measured = getGapWidth(gapMode);
+    lastMeasuredGap = measured;
+
+    return measured;
+  }, [gapMode]);
 
   return <Style styles={getStyles(gap, !noRelative, gapMode, !noImportant ? '!important' : '')} />;
 };
